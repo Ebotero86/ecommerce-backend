@@ -15,10 +15,11 @@ app.use(express.json());
 
 app.use('/categoria', require('./router/categoria'));
 app.use('/marca', require('./router/marca'));
-
+app.use('/producto', require('./router/producto'));
+app.use('/vendedor', require('./router/vendedor'));
 
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`App escuchando peticiones en el puerto ${port}`);
 });
 

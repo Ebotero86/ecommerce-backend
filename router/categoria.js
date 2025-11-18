@@ -14,6 +14,7 @@ router.post('/', (req, res) => {
 
         categoria = categoria.save();
         res.send(categoria);
+        res.status(500).send('ocurrió un error');
         
     } catch (error) {
         console.log(error)   
@@ -37,7 +38,7 @@ router.put('/:categoriaId', async (req, res) => {
         let categoria = await Categoria.findById(categoriaId);
 
         if(!categoria){
-            return res.status(404).send({mensaje: 'Categoria no encontrada'});
+            return res.status(400).send({mensaje: 'Categoria no encontrada'});
         }
         categoria.nombre = req.body.nombre;
         categoria.fechaActualizacion = new Date();

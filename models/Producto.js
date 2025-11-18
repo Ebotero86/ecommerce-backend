@@ -1,8 +1,6 @@
 const { Schema, model } = require('mongoose');
-const Vendedor = require('./Vendedor');
-const Categoria = require('./Categoria');
+const ProductoSchema = new Schema({
 
-const ProductoSchema = Schema({
     nombre: {
         type: String,
         required: true
