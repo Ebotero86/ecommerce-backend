@@ -1,10 +1,15 @@
 const { Router } = require('express');
 const Vendedor = require('../models/Vendedor');
+const { validarVendedor } = require('../helpers/validar_vendedor');
 const router = Router();
 
 router.post('/', async (req, res) => {
    
     try {
+        const validaciones = validarVendedor(req);
+        if (validaciones.length > 0) {
+            return res.status(400).send(validaciones);
+        }
         let vendedor = new Vendedor();
         vendedor.nombre = req.body.nombre;
         vendedor.fechaCreacion = new Date();

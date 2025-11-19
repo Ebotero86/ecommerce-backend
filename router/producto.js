@@ -1,11 +1,17 @@
 const { Router } = require('express');
 const Producto = require('../models/Producto');
+const {validarProducto} = require('../helpers/validar_producto');
 
 const router = Router();
 
 router.post('/', async (req, res) => {
    
     try {
+
+        const validaciones = validarProducto(req);
+        if (validaciones.length > 0) {
+            return res.status(400).send(validaciones);
+        }
         let producto = new Producto();
         producto.nombre = req.body.nombre;
         producto.descripcion = req.body.descripcion;    

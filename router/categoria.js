@@ -1,11 +1,16 @@
 const { Router } = require('express');
 const Categoria = require('../models/Categoria');
+const { validarCategoria } = require('../helpers/validar_categoria');
 
 const router = Router();
 
 router.post('/', (req, res) => {
    
     try {
+        const validaciones = validarCategoria(req);
+        if (validaciones.length > 0) {
+            return res.status(400).send(validaciones);
+        }
 
         let categoria = new Categoria();
         categoria.nombre = req.body.nombre;
