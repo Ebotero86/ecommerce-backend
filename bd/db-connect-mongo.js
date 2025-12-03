@@ -1,20 +1,15 @@
 const mongoose = require('mongoose');
 
 const getConnection = async () => {
-
-    try {
-
-        const url = 'mongodb+srv://BOTERO:Avatar2012@cluster0.w1folqe.mongodb.net/ecommerce-app-db?appName=Cluster0'
-        await mongoose.connect(url);
-
-        console.log('conexión exitosa')
-
-    }catch (error) {
-        console.log(error);
-        
-    }
-}
+  try {
+    const url = process.env.MONGO_URI;
+    await mongoose.connect(url);
+    console.log('Conexión exitosa a MongoDB');
+  } catch (error) {
+    console.error('Error al conectar MongoDB:', error);
+  }
+};
 
 module.exports = {
-    getConnection
-}
+  getConnection
+};
